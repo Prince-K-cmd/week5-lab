@@ -1,0 +1,84 @@
+[2024-12-09T16:06:44.198+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2024-12-09T16:06:44.225+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: weather_data_pipeline.fetch_weather_data scheduled__2024-12-08T00:00:00+00:00 [queued]>
+[2024-12-09T16:06:44.239+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: weather_data_pipeline.fetch_weather_data scheduled__2024-12-08T00:00:00+00:00 [queued]>
+[2024-12-09T16:06:44.240+0000] {taskinstance.py:2866} INFO - Starting attempt 1 of 2
+[2024-12-09T16:06:44.262+0000] {taskinstance.py:2889} INFO - Executing <Task(PythonOperator): fetch_weather_data> on 2024-12-08 00:00:00+00:00
+[2024-12-09T16:06:44.271+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=5329) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2024-12-09T16:06:44.273+0000] {standard_task_runner.py:72} INFO - Started process 5331 to run task
+[2024-12-09T16:06:44.274+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'weather_data_pipeline', 'fetch_weather_data', 'scheduled__2024-12-08T00:00:00+00:00', '--job-id', '6', '--raw', '--subdir', 'DAGS_FOLDER/portland_weather_data_pipeline.py', '--cfg-path', '/tmp/tmpt8u0ojdl']
+[2024-12-09T16:06:44.275+0000] {standard_task_runner.py:105} INFO - Job 6: Subtask fetch_weather_data
+[2024-12-09T16:06:44.344+0000] {task_command.py:467} INFO - Running <TaskInstance: weather_data_pipeline.fetch_weather_data scheduled__2024-12-08T00:00:00+00:00 [running]> on host 4ccd8b9315ad
+[2024-12-09T16:06:44.686+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='weather_data_pipeline' AIRFLOW_CTX_TASK_ID='fetch_weather_data' AIRFLOW_CTX_EXECUTION_DATE='2024-12-08T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-12-08T00:00:00+00:00'
+[2024-12-09T16:06:44.687+0000] {logging_mixin.py:190} INFO - Task instance is in running state
+[2024-12-09T16:06:44.688+0000] {logging_mixin.py:190} INFO -  Previous state of the Task instance: queued
+[2024-12-09T16:06:44.688+0000] {logging_mixin.py:190} INFO - Current task name:fetch_weather_data state:running start_date:2024-12-09 16:06:44.226253+00:00
+[2024-12-09T16:06:44.689+0000] {logging_mixin.py:190} INFO - Dag name:weather_data_pipeline and current dag run status:running
+[2024-12-09T16:06:44.689+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2024-12-09T16:06:45.090+0000] {python.py:240} INFO - Done. Returned value was: {'coord': {'lon': -122.6762, 'lat': 45.5234}, 'weather': [{'id': 800, 'main': 'Clear', 'description': 'clear sky', 'icon': '01d'}], 'base': 'stations', 'main': {'temp': 278.97, 'feels_like': 278.97, 'temp_min': 277.6, 'temp_max': 279.71, 'pressure': 1031, 'humidity': 96, 'sea_level': 1031, 'grnd_level': 1020}, 'visibility': 10000, 'wind': {'speed': 0.45, 'deg': 23, 'gust': 0}, 'clouds': {'all': 8}, 'dt': 1733760400, 'sys': {'type': 2, 'id': 2008548, 'country': 'US', 'sunrise': 1733758781, 'sunset': 1733790437}, 'timezone': -28800, 'id': 5746545, 'name': 'Portland', 'cod': 200}
+[2024-12-09T16:06:45.127+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2024-12-09T16:06:45.128+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=weather_data_pipeline, task_id=fetch_weather_data, run_id=scheduled__2024-12-08T00:00:00+00:00, execution_date=20241208T000000, start_date=20241209T160644, end_date=20241209T160645
+[2024-12-09T16:06:45.144+0000] {logging_mixin.py:190} INFO - Task instance in success state
+[2024-12-09T16:06:45.145+0000] {logging_mixin.py:190} INFO -  Previous state of the Task instance: running
+[2024-12-09T16:06:45.146+0000] {logging_mixin.py:190} INFO - Dag name:weather_data_pipeline queued_at:2024-12-09 16:06:30.104826+00:00
+[2024-12-09T16:06:45.147+0000] {logging_mixin.py:190} INFO - Task hostname:4ccd8b9315ad operator:PythonOperator
+[2024-12-09T16:06:45.213+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2024-12-09T16:06:45.251+0000] {taskinstance.py:3895} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2024-12-09T16:06:45.255+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
+[2024-12-09T20:06:52.936+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2024-12-09T20:06:52.965+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: weather_data_pipeline.fetch_weather_data scheduled__2024-12-08T00:00:00+00:00 [queued]>
+[2024-12-09T20:06:52.980+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: weather_data_pipeline.fetch_weather_data scheduled__2024-12-08T00:00:00+00:00 [queued]>
+[2024-12-09T20:06:52.983+0000] {taskinstance.py:2866} INFO - Starting attempt 1 of 2
+[2024-12-09T20:06:53.012+0000] {taskinstance.py:2889} INFO - Executing <Task(PythonOperator): fetch_weather_data> on 2024-12-08 00:00:00+00:00
+[2024-12-09T20:06:53.023+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=434) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2024-12-09T20:06:53.026+0000] {standard_task_runner.py:72} INFO - Started process 438 to run task
+[2024-12-09T20:06:53.027+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'weather_data_pipeline', 'fetch_weather_data', 'scheduled__2024-12-08T00:00:00+00:00', '--job-id', '69', '--raw', '--subdir', 'DAGS_FOLDER/portland_weather_data_pipeline.py', '--cfg-path', '/tmp/tmpmrz178qd']
+[2024-12-09T20:06:53.030+0000] {standard_task_runner.py:105} INFO - Job 69: Subtask fetch_weather_data
+[2024-12-09T20:06:53.131+0000] {task_command.py:467} INFO - Running <TaskInstance: weather_data_pipeline.fetch_weather_data scheduled__2024-12-08T00:00:00+00:00 [running]> on host 4ccd8b9315ad
+[2024-12-09T20:06:53.606+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='weather_data_pipeline' AIRFLOW_CTX_TASK_ID='fetch_weather_data' AIRFLOW_CTX_EXECUTION_DATE='2024-12-08T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-12-08T00:00:00+00:00'
+[2024-12-09T20:06:53.608+0000] {logging_mixin.py:190} INFO - Task instance is in running state
+[2024-12-09T20:06:53.609+0000] {logging_mixin.py:190} INFO -  Previous state of the Task instance: queued
+[2024-12-09T20:06:53.611+0000] {logging_mixin.py:190} INFO - Current task name:fetch_weather_data state:running start_date:2024-12-09 20:06:52.966763+00:00
+[2024-12-09T20:06:53.612+0000] {logging_mixin.py:190} INFO - Dag name:weather_data_pipeline and current dag run status:running
+[2024-12-09T20:06:53.613+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2024-12-09T20:06:54.039+0000] {python.py:240} INFO - Done. Returned value was: {'coord': {'lon': -122.6762, 'lat': 45.5234}, 'weather': [{'id': 801, 'main': 'Clouds', 'description': 'few clouds', 'icon': '02d'}], 'base': 'stations', 'main': {'temp': 281.49, 'feels_like': 280.36, 'temp_min': 280.12, 'temp_max': 282.93, 'pressure': 1031, 'humidity': 88, 'sea_level': 1031, 'grnd_level': 1020}, 'visibility': 10000, 'wind': {'speed': 2.06, 'deg': 200}, 'clouds': {'all': 20}, 'dt': 1733774765, 'sys': {'type': 2, 'id': 2008548, 'country': 'US', 'sunrise': 1733758781, 'sunset': 1733790437}, 'timezone': -28800, 'id': 5746545, 'name': 'Portland', 'cod': 200}
+[2024-12-09T20:06:54.094+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2024-12-09T20:06:54.095+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=weather_data_pipeline, task_id=fetch_weather_data, run_id=scheduled__2024-12-08T00:00:00+00:00, execution_date=20241208T000000, start_date=20241209T200652, end_date=20241209T200654
+[2024-12-09T20:06:54.124+0000] {logging_mixin.py:190} INFO - Task instance in success state
+[2024-12-09T20:06:54.125+0000] {logging_mixin.py:190} INFO -  Previous state of the Task instance: running
+[2024-12-09T20:06:54.126+0000] {logging_mixin.py:190} INFO - Dag name:weather_data_pipeline queued_at:2024-12-09 20:06:41.678333+00:00
+[2024-12-09T20:06:54.127+0000] {logging_mixin.py:190} INFO - Task hostname:4ccd8b9315ad operator:PythonOperator
+[2024-12-09T20:06:54.214+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2024-12-09T20:06:54.331+0000] {taskinstance.py:3895} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2024-12-09T20:06:54.522+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
+[2024-12-09T20:13:11.045+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2024-12-09T20:13:11.066+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: weather_data_pipeline.fetch_weather_data scheduled__2024-12-08T00:00:00+00:00 [queued]>
+[2024-12-09T20:13:11.078+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: weather_data_pipeline.fetch_weather_data scheduled__2024-12-08T00:00:00+00:00 [queued]>
+[2024-12-09T20:13:11.079+0000] {taskinstance.py:2866} INFO - Starting attempt 1 of 2
+[2024-12-09T20:13:11.101+0000] {taskinstance.py:2889} INFO - Executing <Task(PythonOperator): fetch_weather_data> on 2024-12-08 00:00:00+00:00
+[2024-12-09T20:13:11.110+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=566) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2024-12-09T20:13:11.112+0000] {standard_task_runner.py:72} INFO - Started process 568 to run task
+[2024-12-09T20:13:11.113+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'weather_data_pipeline', 'fetch_weather_data', 'scheduled__2024-12-08T00:00:00+00:00', '--job-id', '84', '--raw', '--subdir', 'DAGS_FOLDER/portland_weather_data_pipeline.py', '--cfg-path', '/tmp/tmpo5y9rhb_']
+[2024-12-09T20:13:11.114+0000] {standard_task_runner.py:105} INFO - Job 84: Subtask fetch_weather_data
+[2024-12-09T20:13:11.180+0000] {task_command.py:467} INFO - Running <TaskInstance: weather_data_pipeline.fetch_weather_data scheduled__2024-12-08T00:00:00+00:00 [running]> on host 4ccd8b9315ad
+[2024-12-09T20:13:11.490+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='weather_data_pipeline' AIRFLOW_CTX_TASK_ID='fetch_weather_data' AIRFLOW_CTX_EXECUTION_DATE='2024-12-08T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-12-08T00:00:00+00:00'
+[2024-12-09T20:13:11.491+0000] {logging_mixin.py:190} INFO - Task instance is in running state
+[2024-12-09T20:13:11.492+0000] {logging_mixin.py:190} INFO -  Previous state of the Task instance: queued
+[2024-12-09T20:13:11.492+0000] {logging_mixin.py:190} INFO - Current task name:fetch_weather_data state:running start_date:2024-12-09 20:13:11.067042+00:00
+[2024-12-09T20:13:11.493+0000] {logging_mixin.py:190} INFO - Dag name:weather_data_pipeline and current dag run status:running
+[2024-12-09T20:13:11.494+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2024-12-09T20:13:11.929+0000] {python.py:240} INFO - Done. Returned value was: {'coord': {'lon': -122.6762, 'lat': 45.5234}, 'weather': [{'id': 801, 'main': 'Clouds', 'description': 'few clouds', 'icon': '02d'}], 'base': 'stations', 'main': {'temp': 281.49, 'feels_like': 280.36, 'temp_min': 280.12, 'temp_max': 282.93, 'pressure': 1031, 'humidity': 88, 'sea_level': 1031, 'grnd_level': 1020}, 'visibility': 10000, 'wind': {'speed': 2.06, 'deg': 200}, 'clouds': {'all': 20}, 'dt': 1733775160, 'sys': {'type': 2, 'id': 2008548, 'country': 'US', 'sunrise': 1733758781, 'sunset': 1733790437}, 'timezone': -28800, 'id': 5746545, 'name': 'Portland', 'cod': 200}
+[2024-12-09T20:13:11.955+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2024-12-09T20:13:11.956+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=weather_data_pipeline, task_id=fetch_weather_data, run_id=scheduled__2024-12-08T00:00:00+00:00, execution_date=20241208T000000, start_date=20241209T201311, end_date=20241209T201311
+[2024-12-09T20:13:11.971+0000] {logging_mixin.py:190} INFO - Task instance in success state
+[2024-12-09T20:13:11.972+0000] {logging_mixin.py:190} INFO -  Previous state of the Task instance: running
+[2024-12-09T20:13:11.973+0000] {logging_mixin.py:190} INFO - Dag name:weather_data_pipeline queued_at:2024-12-09 20:13:03.667018+00:00
+[2024-12-09T20:13:11.974+0000] {logging_mixin.py:190} INFO - Task hostname:4ccd8b9315ad operator:PythonOperator
+[2024-12-09T20:13:12.012+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2024-12-09T20:13:12.045+0000] {taskinstance.py:3895} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2024-12-09T20:13:12.048+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

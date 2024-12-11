@@ -1,0 +1,715 @@
+[2024-12-09T18:32:44.226+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2024-12-09T18:32:44.246+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: weather_data_pipeline.check_api_online scheduled__2024-12-08T00:00:00+00:00 [queued]>
+[2024-12-09T18:32:44.255+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: weather_data_pipeline.check_api_online scheduled__2024-12-08T00:00:00+00:00 [queued]>
+[2024-12-09T18:32:44.256+0000] {taskinstance.py:2866} INFO - Starting attempt 2 of 3
+[2024-12-09T18:32:44.274+0000] {taskinstance.py:2889} INFO - Executing <Task(HttpSensor): check_api_online> on 2024-12-08 00:00:00+00:00
+[2024-12-09T18:32:44.282+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=183) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2024-12-09T18:32:44.284+0000] {standard_task_runner.py:72} INFO - Started process 185 to run task
+[2024-12-09T18:32:44.284+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'weather_data_pipeline', 'check_api_online', 'scheduled__2024-12-08T00:00:00+00:00', '--job-id', '31', '--raw', '--subdir', 'DAGS_FOLDER/portland_weather_data_pipeline.py', '--cfg-path', '/tmp/tmplc5ae6a7']
+[2024-12-09T18:32:44.285+0000] {standard_task_runner.py:105} INFO - Job 31: Subtask check_api_online
+[2024-12-09T18:32:44.340+0000] {task_command.py:467} INFO - Running <TaskInstance: weather_data_pipeline.check_api_online scheduled__2024-12-08T00:00:00+00:00 [running]> on host 4ccd8b9315ad
+[2024-12-09T18:32:44.714+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='weather_data_pipeline' AIRFLOW_CTX_TASK_ID='check_api_online' AIRFLOW_CTX_EXECUTION_DATE='2024-12-08T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-12-08T00:00:00+00:00'
+[2024-12-09T18:32:44.715+0000] {logging_mixin.py:190} INFO - Task instance is in running state
+[2024-12-09T18:32:44.716+0000] {logging_mixin.py:190} INFO -  Previous state of the Task instance: queued
+[2024-12-09T18:32:44.717+0000] {logging_mixin.py:190} INFO - Current task name:check_api_online state:running start_date:2024-12-09 18:32:44.247121+00:00
+[2024-12-09T18:32:44.717+0000] {logging_mixin.py:190} INFO - Dag name:weather_data_pipeline and current dag run status:running
+[2024-12-09T18:32:44.718+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2024-12-09T18:32:44.719+0000] {baseoperator.py:416} WARNING - HttpSensor.execute cannot be called outside TaskInstance!
+[2024-12-09T18:32:44.719+0000] {http.py:137} INFO - Poking: https://api.openweathermap.org/data/2.5/weather?q=Portland&appid=dd24fafbe11ff5c183032972a933481d
+[2024-12-09T18:32:44.738+0000] {taskinstance.py:3311} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 417, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/http/sensors/http.py", line 160, in execute
+    super().execute(context=context)
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 417, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/sensors/base.py", line 306, in execute
+    raise e
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/sensors/base.py", line 286, in execute
+    poke_return = self.poke(context)
+                  ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/http/sensors/http.py", line 154, in poke
+    raise exc
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/http/sensors/http.py", line 139, in poke
+    response = hook.run(
+               ^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/http/hooks/http.py", line 170, in run
+    session = self.get_conn(headers)
+              ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/http/hooks/http.py", line 110, in get_conn
+    conn = self.get_connection(self.http_conn_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/hooks/base.py", line 83, in get_connection
+    conn = Connection.get_connection_from_secrets(conn_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/connection.py", line 537, in get_connection_from_secrets
+    raise AirflowNotFoundException(f"The conn_id `{conn_id}` isn't defined")
+airflow.exceptions.AirflowNotFoundException: The conn_id `openweather_api` isn't defined
+[2024-12-09T18:32:44.749+0000] {logging_mixin.py:190} INFO - Task instance in failure state
+[2024-12-09T18:32:44.750+0000] {logging_mixin.py:190} INFO - Task start:2024-12-09 18:32:44.247121+00:00 end:2024-12-09 18:32:44.749549+00:00 duration:0.502428
+[2024-12-09T18:32:44.751+0000] {logging_mixin.py:190} INFO - Task:<Task(HttpSensor): check_api_online> dag:<DAG: weather_data_pipeline> dagrun:<DagRun weather_data_pipeline @ 2024-12-08 00:00:00+00:00: scheduled__2024-12-08T00:00:00+00:00, state:running, queued_at: 2024-12-09 18:32:41.785888+00:00. externally triggered: False>
+[2024-12-09T18:32:44.752+0000] {logging_mixin.py:190} INFO - Failure caused by The conn_id `openweather_api` isn't defined
+[2024-12-09T18:32:44.753+0000] {taskinstance.py:1225} INFO - Marking task as UP_FOR_RETRY. dag_id=weather_data_pipeline, task_id=check_api_online, run_id=scheduled__2024-12-08T00:00:00+00:00, execution_date=20241208T000000, start_date=20241209T183244, end_date=20241209T183244
+[2024-12-09T18:32:44.774+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2024-12-09T18:32:44.775+0000] {standard_task_runner.py:124} ERROR - Failed to execute job 31 for task check_api_online (The conn_id `openweather_api` isn't defined; 185)
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py", line 117, in _start_by_fork
+    ret = args.func(args, dag=self.dag)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/cli_config.py", line 49, in command
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/cli.py", line 116, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 483, in task_run
+    task_return_code = _run_task_by_selected_method(args, _dag, ti)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 256, in _run_task_by_selected_method
+    return _run_raw_task(args, ti)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 341, in _run_raw_task
+    return ti._run_raw_task(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/session.py", line 97, in wrapper
+    return func(*args, session=session, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3005, in _run_raw_task
+    return _run_raw_task(
+           ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 273, in _run_raw_task
+    TaskInstance._execute_task_with_callbacks(
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3159, in _execute_task_with_callbacks
+    result = self._execute_task(context, task_orig)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3183, in _execute_task
+    return _execute_task(self, context, task_orig)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 417, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/http/sensors/http.py", line 160, in execute
+    super().execute(context=context)
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 417, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/sensors/base.py", line 306, in execute
+    raise e
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/sensors/base.py", line 286, in execute
+    poke_return = self.poke(context)
+                  ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/http/sensors/http.py", line 154, in poke
+    raise exc
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/http/sensors/http.py", line 139, in poke
+    response = hook.run(
+               ^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/http/hooks/http.py", line 170, in run
+    session = self.get_conn(headers)
+              ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/http/hooks/http.py", line 110, in get_conn
+    conn = self.get_connection(self.http_conn_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/hooks/base.py", line 83, in get_connection
+    conn = Connection.get_connection_from_secrets(conn_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/connection.py", line 537, in get_connection_from_secrets
+    raise AirflowNotFoundException(f"The conn_id `{conn_id}` isn't defined")
+airflow.exceptions.AirflowNotFoundException: The conn_id `openweather_api` isn't defined
+[2024-12-09T18:32:44.821+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 1
+[2024-12-09T18:32:44.850+0000] {taskinstance.py:3895} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-12-09T18:32:44.854+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
+[2024-12-09T18:37:12.129+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2024-12-09T18:37:12.163+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: weather_data_pipeline.check_api_online scheduled__2024-12-08T00:00:00+00:00 [queued]>
+[2024-12-09T18:37:12.181+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: weather_data_pipeline.check_api_online scheduled__2024-12-08T00:00:00+00:00 [queued]>
+[2024-12-09T18:37:12.182+0000] {taskinstance.py:2866} INFO - Starting attempt 2 of 2
+[2024-12-09T18:37:12.213+0000] {taskinstance.py:2889} INFO - Executing <Task(HttpSensor): check_api_online> on 2024-12-08 00:00:00+00:00
+[2024-12-09T18:37:12.222+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=67) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2024-12-09T18:37:12.224+0000] {standard_task_runner.py:72} INFO - Started process 69 to run task
+[2024-12-09T18:37:12.226+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'weather_data_pipeline', 'check_api_online', 'scheduled__2024-12-08T00:00:00+00:00', '--job-id', '38', '--raw', '--subdir', 'DAGS_FOLDER/portland_weather_data_pipeline.py', '--cfg-path', '/tmp/tmp03lrgtuu']
+[2024-12-09T18:37:12.228+0000] {standard_task_runner.py:105} INFO - Job 38: Subtask check_api_online
+[2024-12-09T18:37:12.299+0000] {task_command.py:467} INFO - Running <TaskInstance: weather_data_pipeline.check_api_online scheduled__2024-12-08T00:00:00+00:00 [running]> on host 4ccd8b9315ad
+[2024-12-09T18:37:12.735+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='weather_data_pipeline' AIRFLOW_CTX_TASK_ID='check_api_online' AIRFLOW_CTX_EXECUTION_DATE='2024-12-08T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-12-08T00:00:00+00:00'
+[2024-12-09T18:37:12.737+0000] {logging_mixin.py:190} INFO - Task instance is in running state
+[2024-12-09T18:37:12.738+0000] {logging_mixin.py:190} INFO -  Previous state of the Task instance: queued
+[2024-12-09T18:37:12.739+0000] {logging_mixin.py:190} INFO - Current task name:check_api_online state:running start_date:2024-12-09 18:37:12.164629+00:00
+[2024-12-09T18:37:12.740+0000] {logging_mixin.py:190} INFO - Dag name:weather_data_pipeline and current dag run status:running
+[2024-12-09T18:37:12.740+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2024-12-09T18:37:12.741+0000] {baseoperator.py:416} WARNING - HttpSensor.execute cannot be called outside TaskInstance!
+[2024-12-09T18:37:12.742+0000] {http.py:137} INFO - Poking: https://api.openweathermap.org/data/2.5/weather?q=Portland&appid=dd24fafbe11ff5c183032972a933481d
+[2024-12-09T18:37:12.767+0000] {taskinstance.py:3311} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 417, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/http/sensors/http.py", line 160, in execute
+    super().execute(context=context)
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 417, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/sensors/base.py", line 306, in execute
+    raise e
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/sensors/base.py", line 286, in execute
+    poke_return = self.poke(context)
+                  ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/http/sensors/http.py", line 154, in poke
+    raise exc
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/http/sensors/http.py", line 139, in poke
+    response = hook.run(
+               ^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/http/hooks/http.py", line 170, in run
+    session = self.get_conn(headers)
+              ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/http/hooks/http.py", line 110, in get_conn
+    conn = self.get_connection(self.http_conn_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/hooks/base.py", line 83, in get_connection
+    conn = Connection.get_connection_from_secrets(conn_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/connection.py", line 537, in get_connection_from_secrets
+    raise AirflowNotFoundException(f"The conn_id `{conn_id}` isn't defined")
+airflow.exceptions.AirflowNotFoundException: The conn_id `openweather_api` isn't defined
+[2024-12-09T18:37:12.777+0000] {logging_mixin.py:190} INFO - Task instance in failure state
+[2024-12-09T18:37:12.778+0000] {logging_mixin.py:190} INFO - Task start:2024-12-09 18:37:12.164629+00:00 end:2024-12-09 18:37:12.776688+00:00 duration:0.612059
+[2024-12-09T18:37:12.778+0000] {logging_mixin.py:190} INFO - Task:<Task(HttpSensor): check_api_online> dag:<DAG: weather_data_pipeline> dagrun:<DagRun weather_data_pipeline @ 2024-12-08 00:00:00+00:00: scheduled__2024-12-08T00:00:00+00:00, state:running, queued_at: 2024-12-09 18:34:46.984312+00:00. externally triggered: False>
+[2024-12-09T18:37:12.779+0000] {logging_mixin.py:190} INFO - Failure caused by The conn_id `openweather_api` isn't defined
+[2024-12-09T18:37:12.779+0000] {taskinstance.py:1225} INFO - Marking task as FAILED. dag_id=weather_data_pipeline, task_id=check_api_online, run_id=scheduled__2024-12-08T00:00:00+00:00, execution_date=20241208T000000, start_date=20241209T183712, end_date=20241209T183712
+[2024-12-09T18:37:12.798+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2024-12-09T18:37:12.799+0000] {standard_task_runner.py:124} ERROR - Failed to execute job 38 for task check_api_online (The conn_id `openweather_api` isn't defined; 69)
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py", line 117, in _start_by_fork
+    ret = args.func(args, dag=self.dag)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/cli_config.py", line 49, in command
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/cli.py", line 116, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 483, in task_run
+    task_return_code = _run_task_by_selected_method(args, _dag, ti)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 256, in _run_task_by_selected_method
+    return _run_raw_task(args, ti)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 341, in _run_raw_task
+    return ti._run_raw_task(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/session.py", line 97, in wrapper
+    return func(*args, session=session, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3005, in _run_raw_task
+    return _run_raw_task(
+           ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 273, in _run_raw_task
+    TaskInstance._execute_task_with_callbacks(
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3159, in _execute_task_with_callbacks
+    result = self._execute_task(context, task_orig)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3183, in _execute_task
+    return _execute_task(self, context, task_orig)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 417, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/http/sensors/http.py", line 160, in execute
+    super().execute(context=context)
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 417, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/sensors/base.py", line 306, in execute
+    raise e
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/sensors/base.py", line 286, in execute
+    poke_return = self.poke(context)
+                  ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/http/sensors/http.py", line 154, in poke
+    raise exc
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/http/sensors/http.py", line 139, in poke
+    response = hook.run(
+               ^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/http/hooks/http.py", line 170, in run
+    session = self.get_conn(headers)
+              ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/http/hooks/http.py", line 110, in get_conn
+    conn = self.get_connection(self.http_conn_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/hooks/base.py", line 83, in get_connection
+    conn = Connection.get_connection_from_secrets(conn_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/connection.py", line 537, in get_connection_from_secrets
+    raise AirflowNotFoundException(f"The conn_id `{conn_id}` isn't defined")
+airflow.exceptions.AirflowNotFoundException: The conn_id `openweather_api` isn't defined
+[2024-12-09T18:37:12.842+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 1
+[2024-12-09T18:37:12.887+0000] {taskinstance.py:3895} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-12-09T18:37:12.894+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
+[2024-12-09T18:43:44.528+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2024-12-09T18:43:44.557+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: weather_data_pipeline.check_api_online scheduled__2024-12-08T00:00:00+00:00 [queued]>
+[2024-12-09T18:43:44.571+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: weather_data_pipeline.check_api_online scheduled__2024-12-08T00:00:00+00:00 [queued]>
+[2024-12-09T18:43:44.572+0000] {taskinstance.py:2866} INFO - Starting attempt 2 of 2
+[2024-12-09T18:43:44.596+0000] {taskinstance.py:2889} INFO - Executing <Task(HttpSensor): check_api_online> on 2024-12-08 00:00:00+00:00
+[2024-12-09T18:43:44.607+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=68) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2024-12-09T18:43:44.609+0000] {standard_task_runner.py:72} INFO - Started process 70 to run task
+[2024-12-09T18:43:44.609+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'weather_data_pipeline', 'check_api_online', 'scheduled__2024-12-08T00:00:00+00:00', '--job-id', '44', '--raw', '--subdir', 'DAGS_FOLDER/portland_weather_data_pipeline.py', '--cfg-path', '/tmp/tmplivj9k3x']
+[2024-12-09T18:43:44.611+0000] {standard_task_runner.py:105} INFO - Job 44: Subtask check_api_online
+[2024-12-09T18:43:44.692+0000] {task_command.py:467} INFO - Running <TaskInstance: weather_data_pipeline.check_api_online scheduled__2024-12-08T00:00:00+00:00 [running]> on host 4ccd8b9315ad
+[2024-12-09T18:43:45.111+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='weather_data_pipeline' AIRFLOW_CTX_TASK_ID='check_api_online' AIRFLOW_CTX_EXECUTION_DATE='2024-12-08T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-12-08T00:00:00+00:00'
+[2024-12-09T18:43:45.112+0000] {logging_mixin.py:190} INFO - Task instance is in running state
+[2024-12-09T18:43:45.113+0000] {logging_mixin.py:190} INFO -  Previous state of the Task instance: queued
+[2024-12-09T18:43:45.114+0000] {logging_mixin.py:190} INFO - Current task name:check_api_online state:running start_date:2024-12-09 18:43:44.558412+00:00
+[2024-12-09T18:43:45.115+0000] {logging_mixin.py:190} INFO - Dag name:weather_data_pipeline and current dag run status:running
+[2024-12-09T18:43:45.115+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2024-12-09T18:43:45.116+0000] {baseoperator.py:416} WARNING - HttpSensor.execute cannot be called outside TaskInstance!
+[2024-12-09T18:43:45.117+0000] {http.py:137} INFO - Poking: https://api.openweathermap.org/data/2.5/weather?q=Portland&appid=dd24fafbe11ff5c183032972a933481d
+[2024-12-09T18:43:45.140+0000] {taskinstance.py:3311} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 417, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/http/sensors/http.py", line 160, in execute
+    super().execute(context=context)
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 417, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/sensors/base.py", line 306, in execute
+    raise e
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/sensors/base.py", line 286, in execute
+    poke_return = self.poke(context)
+                  ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/http/sensors/http.py", line 154, in poke
+    raise exc
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/http/sensors/http.py", line 139, in poke
+    response = hook.run(
+               ^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/http/hooks/http.py", line 170, in run
+    session = self.get_conn(headers)
+              ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/http/hooks/http.py", line 110, in get_conn
+    conn = self.get_connection(self.http_conn_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/hooks/base.py", line 83, in get_connection
+    conn = Connection.get_connection_from_secrets(conn_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/connection.py", line 537, in get_connection_from_secrets
+    raise AirflowNotFoundException(f"The conn_id `{conn_id}` isn't defined")
+airflow.exceptions.AirflowNotFoundException: The conn_id `openweather_api` isn't defined
+[2024-12-09T18:43:45.151+0000] {logging_mixin.py:190} INFO - Task instance in failure state
+[2024-12-09T18:43:45.152+0000] {logging_mixin.py:190} INFO - Task start:2024-12-09 18:43:44.558412+00:00 end:2024-12-09 18:43:45.150706+00:00 duration:0.592294
+[2024-12-09T18:43:45.153+0000] {logging_mixin.py:190} INFO - Task:<Task(HttpSensor): check_api_online> dag:<DAG: weather_data_pipeline> dagrun:<DagRun weather_data_pipeline @ 2024-12-08 00:00:00+00:00: scheduled__2024-12-08T00:00:00+00:00, state:running, queued_at: 2024-12-09 18:41:38.204570+00:00. externally triggered: False>
+[2024-12-09T18:43:45.153+0000] {logging_mixin.py:190} INFO - Failure caused by The conn_id `openweather_api` isn't defined
+[2024-12-09T18:43:45.154+0000] {taskinstance.py:1225} INFO - Marking task as FAILED. dag_id=weather_data_pipeline, task_id=check_api_online, run_id=scheduled__2024-12-08T00:00:00+00:00, execution_date=20241208T000000, start_date=20241209T184344, end_date=20241209T184345
+[2024-12-09T18:43:45.175+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2024-12-09T18:43:45.176+0000] {standard_task_runner.py:124} ERROR - Failed to execute job 44 for task check_api_online (The conn_id `openweather_api` isn't defined; 70)
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py", line 117, in _start_by_fork
+    ret = args.func(args, dag=self.dag)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/cli_config.py", line 49, in command
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/cli.py", line 116, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 483, in task_run
+    task_return_code = _run_task_by_selected_method(args, _dag, ti)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 256, in _run_task_by_selected_method
+    return _run_raw_task(args, ti)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 341, in _run_raw_task
+    return ti._run_raw_task(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/session.py", line 97, in wrapper
+    return func(*args, session=session, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3005, in _run_raw_task
+    return _run_raw_task(
+           ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 273, in _run_raw_task
+    TaskInstance._execute_task_with_callbacks(
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3159, in _execute_task_with_callbacks
+    result = self._execute_task(context, task_orig)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3183, in _execute_task
+    return _execute_task(self, context, task_orig)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 417, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/http/sensors/http.py", line 160, in execute
+    super().execute(context=context)
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 417, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/sensors/base.py", line 306, in execute
+    raise e
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/sensors/base.py", line 286, in execute
+    poke_return = self.poke(context)
+                  ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/http/sensors/http.py", line 154, in poke
+    raise exc
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/http/sensors/http.py", line 139, in poke
+    response = hook.run(
+               ^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/http/hooks/http.py", line 170, in run
+    session = self.get_conn(headers)
+              ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/http/hooks/http.py", line 110, in get_conn
+    conn = self.get_connection(self.http_conn_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/hooks/base.py", line 83, in get_connection
+    conn = Connection.get_connection_from_secrets(conn_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/connection.py", line 537, in get_connection_from_secrets
+    raise AirflowNotFoundException(f"The conn_id `{conn_id}` isn't defined")
+airflow.exceptions.AirflowNotFoundException: The conn_id `openweather_api` isn't defined
+[2024-12-09T18:43:45.227+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 1
+[2024-12-09T18:43:45.277+0000] {taskinstance.py:3895} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-12-09T18:43:45.286+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
+[2024-12-09T18:49:19.493+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2024-12-09T18:49:19.578+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: weather_data_pipeline.check_api_online scheduled__2024-12-08T00:00:00+00:00 [queued]>
+[2024-12-09T18:49:19.626+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: weather_data_pipeline.check_api_online scheduled__2024-12-08T00:00:00+00:00 [queued]>
+[2024-12-09T18:49:19.628+0000] {taskinstance.py:2866} INFO - Starting attempt 2 of 2
+[2024-12-09T18:49:19.722+0000] {taskinstance.py:2889} INFO - Executing <Task(HttpSensor): check_api_online> on 2024-12-08 00:00:00+00:00
+[2024-12-09T18:49:19.768+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=154) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2024-12-09T18:49:19.780+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'weather_data_pipeline', 'check_api_online', 'scheduled__2024-12-08T00:00:00+00:00', '--job-id', '50', '--raw', '--subdir', 'DAGS_FOLDER/portland_weather_data_pipeline.py', '--cfg-path', '/tmp/tmpdz85ea8f']
+[2024-12-09T18:49:19.782+0000] {standard_task_runner.py:105} INFO - Job 50: Subtask check_api_online
+[2024-12-09T18:49:19.783+0000] {standard_task_runner.py:72} INFO - Started process 159 to run task
+[2024-12-09T18:49:20.000+0000] {task_command.py:467} INFO - Running <TaskInstance: weather_data_pipeline.check_api_online scheduled__2024-12-08T00:00:00+00:00 [running]> on host 4ccd8b9315ad
+[2024-12-09T18:49:21.085+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='weather_data_pipeline' AIRFLOW_CTX_TASK_ID='check_api_online' AIRFLOW_CTX_EXECUTION_DATE='2024-12-08T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-12-08T00:00:00+00:00'
+[2024-12-09T18:49:21.087+0000] {logging_mixin.py:190} INFO - Task instance is in running state
+[2024-12-09T18:49:21.088+0000] {logging_mixin.py:190} INFO -  Previous state of the Task instance: queued
+[2024-12-09T18:49:21.089+0000] {logging_mixin.py:190} INFO - Current task name:check_api_online state:running start_date:2024-12-09 18:49:19.580054+00:00
+[2024-12-09T18:49:21.090+0000] {logging_mixin.py:190} INFO - Dag name:weather_data_pipeline and current dag run status:running
+[2024-12-09T18:49:21.092+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2024-12-09T18:49:21.094+0000] {baseoperator.py:416} WARNING - HttpSensor.execute cannot be called outside TaskInstance!
+[2024-12-09T18:49:21.095+0000] {http.py:137} INFO - Poking: https://api.openweathermap.org/data/2.5/weather?q=Portland&appid=dd24fafbe11ff5c183032972a933481d
+[2024-12-09T18:49:21.143+0000] {taskinstance.py:3311} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 417, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/http/sensors/http.py", line 160, in execute
+    super().execute(context=context)
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 417, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/sensors/base.py", line 306, in execute
+    raise e
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/sensors/base.py", line 286, in execute
+    poke_return = self.poke(context)
+                  ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/http/sensors/http.py", line 154, in poke
+    raise exc
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/http/sensors/http.py", line 139, in poke
+    response = hook.run(
+               ^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/http/hooks/http.py", line 170, in run
+    session = self.get_conn(headers)
+              ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/http/hooks/http.py", line 110, in get_conn
+    conn = self.get_connection(self.http_conn_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/hooks/base.py", line 83, in get_connection
+    conn = Connection.get_connection_from_secrets(conn_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/connection.py", line 537, in get_connection_from_secrets
+    raise AirflowNotFoundException(f"The conn_id `{conn_id}` isn't defined")
+airflow.exceptions.AirflowNotFoundException: The conn_id `openweather_api` isn't defined
+[2024-12-09T18:49:21.162+0000] {logging_mixin.py:190} INFO - Task instance in failure state
+[2024-12-09T18:49:21.163+0000] {logging_mixin.py:190} INFO - Task start:2024-12-09 18:49:19.580054+00:00 end:2024-12-09 18:49:21.161231+00:00 duration:1.581177
+[2024-12-09T18:49:21.164+0000] {logging_mixin.py:190} INFO - Task:<Task(HttpSensor): check_api_online> dag:<DAG: weather_data_pipeline> dagrun:<DagRun weather_data_pipeline @ 2024-12-08 00:00:00+00:00: scheduled__2024-12-08T00:00:00+00:00, state:running, queued_at: 2024-12-09 18:47:06.645067+00:00. externally triggered: False>
+[2024-12-09T18:49:21.165+0000] {logging_mixin.py:190} INFO - Failure caused by The conn_id `openweather_api` isn't defined
+[2024-12-09T18:49:21.165+0000] {taskinstance.py:1225} INFO - Marking task as FAILED. dag_id=weather_data_pipeline, task_id=check_api_online, run_id=scheduled__2024-12-08T00:00:00+00:00, execution_date=20241208T000000, start_date=20241209T184919, end_date=20241209T184921
+[2024-12-09T18:49:21.213+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2024-12-09T18:49:21.220+0000] {standard_task_runner.py:124} ERROR - Failed to execute job 50 for task check_api_online (The conn_id `openweather_api` isn't defined; 159)
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py", line 117, in _start_by_fork
+    ret = args.func(args, dag=self.dag)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/cli_config.py", line 49, in command
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/cli.py", line 116, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 483, in task_run
+    task_return_code = _run_task_by_selected_method(args, _dag, ti)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 256, in _run_task_by_selected_method
+    return _run_raw_task(args, ti)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 341, in _run_raw_task
+    return ti._run_raw_task(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/session.py", line 97, in wrapper
+    return func(*args, session=session, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3005, in _run_raw_task
+    return _run_raw_task(
+           ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 273, in _run_raw_task
+    TaskInstance._execute_task_with_callbacks(
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3159, in _execute_task_with_callbacks
+    result = self._execute_task(context, task_orig)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3183, in _execute_task
+    return _execute_task(self, context, task_orig)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 417, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/http/sensors/http.py", line 160, in execute
+    super().execute(context=context)
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 417, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/sensors/base.py", line 306, in execute
+    raise e
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/sensors/base.py", line 286, in execute
+    poke_return = self.poke(context)
+                  ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/http/sensors/http.py", line 154, in poke
+    raise exc
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/http/sensors/http.py", line 139, in poke
+    response = hook.run(
+               ^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/http/hooks/http.py", line 170, in run
+    session = self.get_conn(headers)
+              ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/http/hooks/http.py", line 110, in get_conn
+    conn = self.get_connection(self.http_conn_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/hooks/base.py", line 83, in get_connection
+    conn = Connection.get_connection_from_secrets(conn_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/connection.py", line 537, in get_connection_from_secrets
+    raise AirflowNotFoundException(f"The conn_id `{conn_id}` isn't defined")
+airflow.exceptions.AirflowNotFoundException: The conn_id `openweather_api` isn't defined
+[2024-12-09T18:49:21.308+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 1
+[2024-12-09T18:49:21.442+0000] {taskinstance.py:3895} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-12-09T18:49:21.513+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
+[2024-12-09T19:14:36.890+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2024-12-09T19:14:36.940+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: weather_data_pipeline.check_api_online scheduled__2024-12-08T00:00:00+00:00 [queued]>
+[2024-12-09T19:14:36.960+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: weather_data_pipeline.check_api_online scheduled__2024-12-08T00:00:00+00:00 [queued]>
+[2024-12-09T19:14:36.962+0000] {taskinstance.py:2866} INFO - Starting attempt 2 of 2
+[2024-12-09T19:14:37.018+0000] {taskinstance.py:2889} INFO - Executing <Task(HttpSensor): check_api_online> on 2024-12-08 00:00:00+00:00
+[2024-12-09T19:14:37.033+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=484) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2024-12-09T19:14:37.037+0000] {standard_task_runner.py:72} INFO - Started process 495 to run task
+[2024-12-09T19:14:37.037+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'weather_data_pipeline', 'check_api_online', 'scheduled__2024-12-08T00:00:00+00:00', '--job-id', '55', '--raw', '--subdir', 'DAGS_FOLDER/portland_weather_data_pipeline.py', '--cfg-path', '/tmp/tmphpeq1lug']
+[2024-12-09T19:14:37.046+0000] {standard_task_runner.py:105} INFO - Job 55: Subtask check_api_online
+[2024-12-09T19:14:37.143+0000] {task_command.py:467} INFO - Running <TaskInstance: weather_data_pipeline.check_api_online scheduled__2024-12-08T00:00:00+00:00 [running]> on host 4ccd8b9315ad
+[2024-12-09T19:14:37.778+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='weather_data_pipeline' AIRFLOW_CTX_TASK_ID='check_api_online' AIRFLOW_CTX_EXECUTION_DATE='2024-12-08T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-12-08T00:00:00+00:00'
+[2024-12-09T19:14:37.782+0000] {logging_mixin.py:190} INFO - Task instance is in running state
+[2024-12-09T19:14:37.784+0000] {logging_mixin.py:190} INFO -  Previous state of the Task instance: queued
+[2024-12-09T19:14:37.785+0000] {logging_mixin.py:190} INFO - Current task name:check_api_online state:running start_date:2024-12-09 19:14:36.941934+00:00
+[2024-12-09T19:14:37.786+0000] {logging_mixin.py:190} INFO - Dag name:weather_data_pipeline and current dag run status:running
+[2024-12-09T19:14:37.791+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2024-12-09T19:14:37.794+0000] {baseoperator.py:416} WARNING - HttpSensor.execute cannot be called outside TaskInstance!
+[2024-12-09T19:14:37.795+0000] {http.py:137} INFO - Poking: https://api.openweathermap.org/data/2.5/weather?q=Portland&appid=dd24fafbe11ff5c183032972a933481d
+[2024-12-09T19:14:37.838+0000] {taskinstance.py:3311} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 417, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/http/sensors/http.py", line 160, in execute
+    super().execute(context=context)
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 417, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/sensors/base.py", line 306, in execute
+    raise e
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/sensors/base.py", line 286, in execute
+    poke_return = self.poke(context)
+                  ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/http/sensors/http.py", line 154, in poke
+    raise exc
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/http/sensors/http.py", line 139, in poke
+    response = hook.run(
+               ^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/http/hooks/http.py", line 170, in run
+    session = self.get_conn(headers)
+              ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/http/hooks/http.py", line 110, in get_conn
+    conn = self.get_connection(self.http_conn_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/hooks/base.py", line 83, in get_connection
+    conn = Connection.get_connection_from_secrets(conn_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/connection.py", line 537, in get_connection_from_secrets
+    raise AirflowNotFoundException(f"The conn_id `{conn_id}` isn't defined")
+airflow.exceptions.AirflowNotFoundException: The conn_id `openweather_api` isn't defined
+[2024-12-09T19:14:37.851+0000] {logging_mixin.py:190} INFO - Task instance in failure state
+[2024-12-09T19:14:37.853+0000] {logging_mixin.py:190} INFO - Task start:2024-12-09 19:14:36.941934+00:00 end:2024-12-09 19:14:37.850932+00:00 duration:0.908998
+[2024-12-09T19:14:37.857+0000] {logging_mixin.py:190} INFO - Task:<Task(HttpSensor): check_api_online> dag:<DAG: weather_data_pipeline> dagrun:<DagRun weather_data_pipeline @ 2024-12-08 00:00:00+00:00: scheduled__2024-12-08T00:00:00+00:00, state:running, queued_at: 2024-12-09 19:12:27.740611+00:00. externally triggered: False>
+[2024-12-09T19:14:37.858+0000] {logging_mixin.py:190} INFO - Failure caused by The conn_id `openweather_api` isn't defined
+[2024-12-09T19:14:37.866+0000] {taskinstance.py:1225} INFO - Marking task as FAILED. dag_id=weather_data_pipeline, task_id=check_api_online, run_id=scheduled__2024-12-08T00:00:00+00:00, execution_date=20241208T000000, start_date=20241209T191436, end_date=20241209T191437
+[2024-12-09T19:14:37.903+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2024-12-09T19:14:37.904+0000] {standard_task_runner.py:124} ERROR - Failed to execute job 55 for task check_api_online (The conn_id `openweather_api` isn't defined; 495)
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py", line 117, in _start_by_fork
+    ret = args.func(args, dag=self.dag)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/cli_config.py", line 49, in command
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/cli.py", line 116, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 483, in task_run
+    task_return_code = _run_task_by_selected_method(args, _dag, ti)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 256, in _run_task_by_selected_method
+    return _run_raw_task(args, ti)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 341, in _run_raw_task
+    return ti._run_raw_task(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/session.py", line 97, in wrapper
+    return func(*args, session=session, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3005, in _run_raw_task
+    return _run_raw_task(
+           ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 273, in _run_raw_task
+    TaskInstance._execute_task_with_callbacks(
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3159, in _execute_task_with_callbacks
+    result = self._execute_task(context, task_orig)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3183, in _execute_task
+    return _execute_task(self, context, task_orig)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 417, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/http/sensors/http.py", line 160, in execute
+    super().execute(context=context)
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 417, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/sensors/base.py", line 306, in execute
+    raise e
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/sensors/base.py", line 286, in execute
+    poke_return = self.poke(context)
+                  ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/http/sensors/http.py", line 154, in poke
+    raise exc
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/http/sensors/http.py", line 139, in poke
+    response = hook.run(
+               ^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/http/hooks/http.py", line 170, in run
+    session = self.get_conn(headers)
+              ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/http/hooks/http.py", line 110, in get_conn
+    conn = self.get_connection(self.http_conn_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/hooks/base.py", line 83, in get_connection
+    conn = Connection.get_connection_from_secrets(conn_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/connection.py", line 537, in get_connection_from_secrets
+    raise AirflowNotFoundException(f"The conn_id `{conn_id}` isn't defined")
+airflow.exceptions.AirflowNotFoundException: The conn_id `openweather_api` isn't defined
+[2024-12-09T19:14:37.986+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 1
+[2024-12-09T19:14:38.054+0000] {taskinstance.py:3895} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-12-09T19:14:38.064+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

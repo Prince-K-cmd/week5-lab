@@ -1,0 +1,66 @@
+[2024-12-11T11:38:28.609+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2024-12-11T11:38:28.643+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: weather_data_pipeline.load_weather_data manual__2024-12-11T10:30:40.208041+00:00 [queued]>
+[2024-12-11T11:38:28.665+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: weather_data_pipeline.load_weather_data manual__2024-12-11T10:30:40.208041+00:00 [queued]>
+[2024-12-11T11:38:28.667+0000] {taskinstance.py:2866} INFO - Starting attempt 37 of 38
+[2024-12-11T11:38:28.701+0000] {taskinstance.py:2889} INFO - Executing <Task(PostgresOperator): load_weather_data> on 2024-12-11 10:30:40.208041+00:00
+[2024-12-11T11:38:28.710+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=2229) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2024-12-11T11:38:28.713+0000] {standard_task_runner.py:72} INFO - Started process 2231 to run task
+[2024-12-11T11:38:28.714+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'weather_data_pipeline', 'load_weather_data', 'manual__2024-12-11T10:30:40.208041+00:00', '--job-id', '169', '--raw', '--subdir', 'DAGS_FOLDER/portland_weather_data_pipeline.py', '--cfg-path', '/tmp/tmpjsys0ci4']
+[2024-12-11T11:38:28.716+0000] {standard_task_runner.py:105} INFO - Job 169: Subtask load_weather_data
+[2024-12-11T11:38:28.793+0000] {task_command.py:467} INFO - Running <TaskInstance: weather_data_pipeline.load_weather_data manual__2024-12-11T10:30:40.208041+00:00 [running]> on host 4ccd8b9315ad
+[2024-12-11T11:38:29.010+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='weather_data_pipeline' AIRFLOW_CTX_TASK_ID='load_weather_data' AIRFLOW_CTX_EXECUTION_DATE='2024-12-11T10:30:40.208041+00:00' AIRFLOW_CTX_TRY_NUMBER='37' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-12-11T10:30:40.208041+00:00'
+[2024-12-11T11:38:29.013+0000] {logging_mixin.py:190} INFO - Task instance is in running state
+[2024-12-11T11:38:29.014+0000] {logging_mixin.py:190} INFO -  Previous state of the Task instance: queued
+[2024-12-11T11:38:29.015+0000] {logging_mixin.py:190} INFO - Current task name:load_weather_data state:running start_date:2024-12-11 11:38:28.644138+00:00
+[2024-12-11T11:38:29.016+0000] {logging_mixin.py:190} INFO - Dag name:weather_data_pipeline and current dag run status:running
+[2024-12-11T11:38:29.017+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2024-12-11T11:38:29.020+0000] {sql.py:278} INFO - Executing:  
+        CREATE TABLE IF NOT EXISTS daily_weather (
+            city VARCHAR(255),
+            temperature DECIMAL(10, 2),
+            pressure DECIMAL(10, 2),
+            humidity DECIMAL(10, 2),
+            timestamp TIMESTAMP
+        );
+
+        INSERT INTO daily_weather (city, temperature, pressure, humidity, timestamp)
+        VALUES (
+            %(city)s,
+            %(temperature)s,
+            %(pressure)s,
+            %(humidity)s,
+            %(timestamp)s
+        );
+    
+[2024-12-11T11:38:29.036+0000] {base.py:84} INFO - Retrieving connection 'portland_data'
+[2024-12-11T11:38:29.046+0000] {base.py:84} INFO - Retrieving connection 'portland_data'
+[2024-12-11T11:38:29.156+0000] {sql.py:544} INFO - Running statement:  
+        CREATE TABLE IF NOT EXISTS daily_weather (
+            city VARCHAR(255),
+            temperature DECIMAL(10, 2),
+            pressure DECIMAL(10, 2),
+            humidity DECIMAL(10, 2),
+            timestamp TIMESTAMP
+        );
+
+        INSERT INTO daily_weather (city, temperature, pressure, humidity, timestamp)
+        VALUES (
+            %(city)s,
+            %(temperature)s,
+            %(pressure)s,
+            %(humidity)s,
+            %(timestamp)s
+        );
+    , parameters: {'city': '', 'temperature': '0', 'pressure': '0', 'humidity': '0', 'timestamp': '1970-01-01 00:00:00'}
+[2024-12-11T11:38:29.173+0000] {sql.py:553} INFO - Rows affected: 1
+[2024-12-11T11:38:29.191+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2024-12-11T11:38:29.192+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=weather_data_pipeline, task_id=load_weather_data, run_id=manual__2024-12-11T10:30:40.208041+00:00, execution_date=20241211T103040, start_date=20241211T113828, end_date=20241211T113829
+[2024-12-11T11:38:29.206+0000] {logging_mixin.py:190} INFO - Task instance in success state
+[2024-12-11T11:38:29.207+0000] {logging_mixin.py:190} INFO -  Previous state of the Task instance: running
+[2024-12-11T11:38:29.207+0000] {logging_mixin.py:190} INFO - Dag name:weather_data_pipeline queued_at:2024-12-11 11:30:18.286542+00:00
+[2024-12-11T11:38:29.208+0000] {logging_mixin.py:190} INFO - Task hostname:4ccd8b9315ad operator:PostgresOperator
+[2024-12-11T11:38:29.251+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2024-12-11T11:38:29.274+0000] {taskinstance.py:3895} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-12-11T11:38:29.278+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

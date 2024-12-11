@@ -1,0 +1,144 @@
+[2024-12-11T10:31:13.053+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2024-12-11T10:31:13.107+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: weather_data_pipeline.load_weather_data manual__2024-12-11T10:30:40.208041+00:00 [queued]>
+[2024-12-11T10:31:13.139+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: weather_data_pipeline.load_weather_data manual__2024-12-11T10:30:40.208041+00:00 [queued]>
+[2024-12-11T10:31:13.141+0000] {taskinstance.py:2866} INFO - Starting attempt 1 of 2
+[2024-12-11T10:31:13.187+0000] {taskinstance.py:2889} INFO - Executing <Task(PostgresOperator): load_weather_data> on 2024-12-11 10:30:40.208041+00:00
+[2024-12-11T10:31:13.200+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=1344) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2024-12-11T10:31:13.204+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'weather_data_pipeline', 'load_weather_data', 'manual__2024-12-11T10:30:40.208041+00:00', '--job-id', '135', '--raw', '--subdir', 'DAGS_FOLDER/portland_weather_data_pipeline.py', '--cfg-path', '/tmp/tmph1wcb8j4']
+[2024-12-11T10:31:13.206+0000] {standard_task_runner.py:72} INFO - Started process 1346 to run task
+[2024-12-11T10:31:13.206+0000] {standard_task_runner.py:105} INFO - Job 135: Subtask load_weather_data
+[2024-12-11T10:31:13.317+0000] {task_command.py:467} INFO - Running <TaskInstance: weather_data_pipeline.load_weather_data manual__2024-12-11T10:30:40.208041+00:00 [running]> on host 4ccd8b9315ad
+[2024-12-11T10:31:13.913+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='weather_data_pipeline' AIRFLOW_CTX_TASK_ID='load_weather_data' AIRFLOW_CTX_EXECUTION_DATE='2024-12-11T10:30:40.208041+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-12-11T10:30:40.208041+00:00'
+[2024-12-11T10:31:13.915+0000] {logging_mixin.py:190} INFO - Task instance is in running state
+[2024-12-11T10:31:13.916+0000] {logging_mixin.py:190} INFO -  Previous state of the Task instance: queued
+[2024-12-11T10:31:13.917+0000] {logging_mixin.py:190} INFO - Current task name:load_weather_data state:running start_date:2024-12-11 10:31:13.108704+00:00
+[2024-12-11T10:31:13.917+0000] {logging_mixin.py:190} INFO - Dag name:weather_data_pipeline and current dag run status:running
+[2024-12-11T10:31:13.918+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2024-12-11T10:31:13.919+0000] {sql.py:278} INFO - Executing: 
+        CREATE TABLE IF NOT EXISTS daily_weather (
+            city VARCHAR(255),
+            temperature DECIMAL(10, 2),
+            pressure DECIMAL(10, 2),
+            humidity DECIMAL(10, 2),
+            timestamp TIMESTAMP,
+            sunrise TIMESTAMP,
+            sunset TIMESTAMP
+        );
+
+        INSERT INTO daily_weather (city, temperature, pressure, humidity, timestamp, sunrise, sunset)
+        VALUES (%s, %s, %s, %s, %s, %s, %s);
+    
+[2024-12-11T10:31:13.937+0000] {base.py:84} INFO - Retrieving connection 'portland_data'
+[2024-12-11T10:31:13.950+0000] {base.py:84} INFO - Retrieving connection 'portland_data'
+[2024-12-11T10:31:14.074+0000] {sql.py:544} INFO - Running statement: 
+        CREATE TABLE IF NOT EXISTS daily_weather (
+            city VARCHAR(255),
+            temperature DECIMAL(10, 2),
+            pressure DECIMAL(10, 2),
+            humidity DECIMAL(10, 2),
+            timestamp TIMESTAMP,
+            sunrise TIMESTAMP,
+            sunset TIMESTAMP
+        );
+
+        INSERT INTO daily_weather (city, temperature, pressure, humidity, timestamp, sunrise, sunset)
+        VALUES (%s, %s, %s, %s, %s, %s, %s);
+    , parameters: ['None', 'None', 'None', 'None', 'None', 'None', 'None']
+[2024-12-11T10:31:14.120+0000] {taskinstance.py:3311} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 417, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/common/sql/operators/sql.py", line 284, in execute
+    output = hook.run(
+             ^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/common/sql/hooks/sql.py", line 489, in run
+    self._run_command(cur, sql_statement, parameters)
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/common/sql/hooks/sql.py", line 547, in _run_command
+    cur.execute(sql_statement, parameters)
+psycopg2.errors.InvalidTextRepresentation: invalid input syntax for type numeric: "None"
+LINE 13:         VALUES ('None', 'None', 'None', 'None', 'None', 'Non...
+                                 ^
+
+[2024-12-11T10:31:14.154+0000] {logging_mixin.py:190} INFO - Task instance in failure state
+[2024-12-11T10:31:14.155+0000] {logging_mixin.py:190} INFO - Task start:2024-12-11 10:31:13.108704+00:00 end:2024-12-11 10:31:14.152041+00:00 duration:1.043337
+[2024-12-11T10:31:14.157+0000] {logging_mixin.py:190} INFO - Task:<Task(PostgresOperator): load_weather_data> dag:<DAG: weather_data_pipeline> dagrun:<DagRun weather_data_pipeline @ 2024-12-11 10:30:40.208041+00:00: manual__2024-12-11T10:30:40.208041+00:00, state:running, queued_at: 2024-12-11 10:30:40.230595+00:00. externally triggered: True>
+[2024-12-11T10:31:14.158+0000] {logging_mixin.py:190} INFO - Failure caused by invalid input syntax for type numeric: "None"
+LINE 13:         VALUES ('None', 'None', 'None', 'None', 'None', 'Non...
+                                 ^
+[2024-12-11T10:31:14.160+0000] {taskinstance.py:1225} INFO - Marking task as UP_FOR_RETRY. dag_id=weather_data_pipeline, task_id=load_weather_data, run_id=manual__2024-12-11T10:30:40.208041+00:00, execution_date=20241211T103040, start_date=20241211T103113, end_date=20241211T103114
+[2024-12-11T10:31:14.193+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2024-12-11T10:31:14.195+0000] {standard_task_runner.py:124} ERROR - Failed to execute job 135 for task load_weather_data (invalid input syntax for type numeric: "None"
+LINE 13:         VALUES ('None', 'None', 'None', 'None', 'None', 'Non...
+                                 ^
+; 1346)
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py", line 117, in _start_by_fork
+    ret = args.func(args, dag=self.dag)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/cli_config.py", line 49, in command
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/cli.py", line 116, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 483, in task_run
+    task_return_code = _run_task_by_selected_method(args, _dag, ti)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 256, in _run_task_by_selected_method
+    return _run_raw_task(args, ti)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 341, in _run_raw_task
+    return ti._run_raw_task(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/session.py", line 97, in wrapper
+    return func(*args, session=session, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3005, in _run_raw_task
+    return _run_raw_task(
+           ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 273, in _run_raw_task
+    TaskInstance._execute_task_with_callbacks(
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3159, in _execute_task_with_callbacks
+    result = self._execute_task(context, task_orig)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3183, in _execute_task
+    return _execute_task(self, context, task_orig)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 417, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/common/sql/operators/sql.py", line 284, in execute
+    output = hook.run(
+             ^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/common/sql/hooks/sql.py", line 489, in run
+    self._run_command(cur, sql_statement, parameters)
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/common/sql/hooks/sql.py", line 547, in _run_command
+    cur.execute(sql_statement, parameters)
+psycopg2.errors.InvalidTextRepresentation: invalid input syntax for type numeric: "None"
+LINE 13:         VALUES ('None', 'None', 'None', 'None', 'None', 'Non...
+                                 ^
+
+[2024-12-11T10:31:14.267+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 1
+[2024-12-11T10:31:14.308+0000] {taskinstance.py:3895} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-12-11T10:31:14.313+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
