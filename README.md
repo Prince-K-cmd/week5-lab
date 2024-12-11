@@ -11,8 +11,13 @@ The project is organized into several directories:
 - `config`: Contains configuration files for the pipeline.
 - `airflow_env`: Directory containing Airflow environment setup.
 - `UI`: Contains UI elements for the project.
+- `PowerApps`: Contains Power Apps components for user interaction and visualization.
 
 ## Key Files
 
 - `docker-compose.yaml`: Defines the Docker Compose configuration for the project.
 - `.gitignore`: Specifies files and directories to ignore during version control.
+
+## Power Apps
+
+DETaxiDemo solution file is located in the `./powerApps` directory.
