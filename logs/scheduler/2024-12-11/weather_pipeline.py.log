@@ -2368,3 +2368,8 @@ airflow.exceptions.AirflowNotFoundException: The conn_id `weather_api_connection
 [2024-12-11T12:01:40.613+0000] {logging_mixin.py:190} INFO - [2024-12-11T12:01:40.612+0000] {dagbag.py:588} INFO - Filling up the DagBag from /opt/airflow/dags/weather_pipeline.py
 [2024-12-11T12:01:40.653+0000] {processor.py:927} WARNING - No viable dags retrieved from /opt/airflow/dags/weather_pipeline.py
 [2024-12-11T12:01:40.700+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/weather_pipeline.py took 0.123 seconds
+[2024-12-11T14:09:57.467+0000] {processor.py:186} INFO - Started process (PID=37495) to work on /opt/airflow/dags/weather_pipeline.py
+[2024-12-11T14:09:57.468+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/weather_pipeline.py for tasks to queue
+[2024-12-11T14:09:57.470+0000] {logging_mixin.py:190} INFO - [2024-12-11T14:09:57.469+0000] {dagbag.py:588} INFO - Filling up the DagBag from /opt/airflow/dags/weather_pipeline.py
+[2024-12-11T14:09:57.483+0000] {processor.py:927} WARNING - No viable dags retrieved from /opt/airflow/dags/weather_pipeline.py
+[2024-12-11T14:09:57.497+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/weather_pipeline.py took 0.041 seconds
