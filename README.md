@@ -16,15 +16,3 @@ The project is organized into several directories:
 
 - `docker-compose.yaml`: Defines the Docker Compose configuration for the project.
 - `.gitignore`: Specifies files and directories to ignore during version control.
-
-## Contributing
-
-(If applicable, provide guidelines for contributing to the project.)
-
-## License
-
-(Specify the license under which the project is distributed.)
-
-## Screenshots (from UI directory)
-
-(Include relevant screenshots from the UI directory, if any.)
