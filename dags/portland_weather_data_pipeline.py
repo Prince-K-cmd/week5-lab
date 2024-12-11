@@ -30,7 +30,7 @@ dag = DAG(
 )
 
 # Define the API key and base URL
-API_KEY = 'dd24fafbe11ff5c183032972a933481d'
+API_KEY = BaseHook.get_connection('open_weather_api').extra_dejson['API_KEY']
 BASE_URL = 'https://api.openweathermap.org/data/2.5/weather'
 
 # Define the HttpSensor task to check if the API is online
@@ -185,3 +185,4 @@ load_weather_task = PostgresOperator(
 
 # Set up the task dependencies
 check_api_online >> fetch_weather_data >> transform_weather_data >> load_weather_task
+

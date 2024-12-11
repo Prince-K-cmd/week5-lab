@@ -4984,3 +4984,24 @@ SyntaxError: invalid syntax. Perhaps you forgot a comma?
 [2024-12-11T11:59:59.018+0000] {logging_mixin.py:190} INFO - [2024-12-11T11:59:59.017+0000] {dag.py:3239} INFO - Sync 1 DAGs
 [2024-12-11T11:59:59.154+0000] {logging_mixin.py:190} INFO - [2024-12-11T11:59:59.153+0000] {dag.py:4180} INFO - Setting next_dagrun for weather_data_pipeline to 2024-12-11 00:00:00+00:00, run_after=2024-12-12 00:00:00+00:00
 [2024-12-11T11:59:59.294+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/portland_weather_data_pipeline.py took 1.346 seconds
+[2024-12-11T12:00:29.609+0000] {processor.py:186} INFO - Started process (PID=24450) to work on /opt/airflow/dags/portland_weather_data_pipeline.py
+[2024-12-11T12:00:29.614+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/portland_weather_data_pipeline.py for tasks to queue
+[2024-12-11T12:00:29.617+0000] {logging_mixin.py:190} INFO - [2024-12-11T12:00:29.616+0000] {dagbag.py:588} INFO - Filling up the DagBag from /opt/airflow/dags/portland_weather_data_pipeline.py
+[2024-12-11T12:00:29.668+0000] {processor.py:925} INFO - DAG(s) 'weather_data_pipeline' retrieved from /opt/airflow/dags/portland_weather_data_pipeline.py
+[2024-12-11T12:00:29.724+0000] {logging_mixin.py:190} INFO - [2024-12-11T12:00:29.724+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-12-11T12:00:29.801+0000] {logging_mixin.py:190} INFO - [2024-12-11T12:00:29.801+0000] {dag.py:4180} INFO - Setting next_dagrun for weather_data_pipeline to 2024-12-11 00:00:00+00:00, run_after=2024-12-12 00:00:00+00:00
+[2024-12-11T12:00:29.838+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/portland_weather_data_pipeline.py took 0.242 seconds
+[2024-12-11T12:01:00.391+0000] {processor.py:186} INFO - Started process (PID=24516) to work on /opt/airflow/dags/portland_weather_data_pipeline.py
+[2024-12-11T12:01:00.407+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/portland_weather_data_pipeline.py for tasks to queue
+[2024-12-11T12:01:00.414+0000] {logging_mixin.py:190} INFO - [2024-12-11T12:01:00.413+0000] {dagbag.py:588} INFO - Filling up the DagBag from /opt/airflow/dags/portland_weather_data_pipeline.py
+[2024-12-11T12:01:01.117+0000] {processor.py:925} INFO - DAG(s) 'weather_data_pipeline' retrieved from /opt/airflow/dags/portland_weather_data_pipeline.py
+[2024-12-11T12:01:01.205+0000] {logging_mixin.py:190} INFO - [2024-12-11T12:01:01.195+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-12-11T12:01:01.343+0000] {logging_mixin.py:190} INFO - [2024-12-11T12:01:01.343+0000] {dag.py:4180} INFO - Setting next_dagrun for weather_data_pipeline to 2024-12-11 00:00:00+00:00, run_after=2024-12-12 00:00:00+00:00
+[2024-12-11T12:01:01.462+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/portland_weather_data_pipeline.py took 1.093 seconds
+[2024-12-11T12:01:32.036+0000] {processor.py:186} INFO - Started process (PID=24582) to work on /opt/airflow/dags/portland_weather_data_pipeline.py
+[2024-12-11T12:01:32.041+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/portland_weather_data_pipeline.py for tasks to queue
+[2024-12-11T12:01:32.043+0000] {logging_mixin.py:190} INFO - [2024-12-11T12:01:32.043+0000] {dagbag.py:588} INFO - Filling up the DagBag from /opt/airflow/dags/portland_weather_data_pipeline.py
+[2024-12-11T12:01:32.099+0000] {processor.py:925} INFO - DAG(s) 'weather_data_pipeline' retrieved from /opt/airflow/dags/portland_weather_data_pipeline.py
+[2024-12-11T12:01:32.153+0000] {logging_mixin.py:190} INFO - [2024-12-11T12:01:32.153+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-12-11T12:01:32.229+0000] {logging_mixin.py:190} INFO - [2024-12-11T12:01:32.229+0000] {dag.py:4180} INFO - Setting next_dagrun for weather_data_pipeline to 2024-12-11 00:00:00+00:00, run_after=2024-12-12 00:00:00+00:00
+[2024-12-11T12:01:32.322+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/portland_weather_data_pipeline.py took 0.299 seconds
